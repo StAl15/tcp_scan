@@ -1,4 +1,5 @@
 import socket
+from logging_message import *
 
 
 def scan_port(ip, port):
@@ -9,8 +10,8 @@ def scan_port(ip, port):
         sock.connect((ip, port))
         result = True
         sock.close()
-    except:
-        pass
+    except Exception as e:
+        send_log(str(e) + ' in fun scan_port')
     return result
 
 

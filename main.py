@@ -3,6 +3,7 @@ from aiohttp import web
 import asyncio
 import json
 from scanner import *
+from logging_message import *
 
 
 async def handle(request):
@@ -17,9 +18,11 @@ async def scan(request):
         end_port = request.query['end_port']
         result = receive_open_ports(ip, int(begin_port), int(end_port))
         result = {'ip': ip, 'result': [result]}
+        send_log("success")
         return web.Response(text=json.dumps(result), status=200)
-    except:
-        print(Exception, ' something went wrong')
+    except Exception as e:
+        send_log(str(e) + ' in scan in main.py')
+        print(e, ' something went wrong')
 
 
 app = web.Application()
