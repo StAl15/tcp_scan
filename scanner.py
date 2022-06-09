@@ -6,7 +6,7 @@ def scan_port(ip, port):
     sock.settimeout(0.5)
     result = False
     try:
-        connect = sock.connect((ip, port))
+        sock.connect((ip, port))
         result = True
         sock.close()
     except:
